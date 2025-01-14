@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,14 +14,14 @@ public class Player : MonoBehaviour
 
     private void Start ()
     {
-        
+        _numSeedsLeft = _numSeeds;
+        _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted);
     }
 
     private void Update()
     {
         _numSeedsLeft = _numSeeds;
         _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted);
-        PlantSeed ();
         
 
         if(Input.GetKey(KeyCode.W))
@@ -39,25 +40,19 @@ public class Player : MonoBehaviour
         {
             _playerTransform.position += Vector3.left * _speed * Time.deltaTime;
         }
-
-    }
-
-    private void PrintMessage ()
-    {
-        Debug.Log("hello world");
+        if(Input.GetKeyDown(KeyCode.Space) && _numSeedsLeft > 0)
+        {
+            PlantSeed();
+        }
     }
 
     public void PlantSeed ()
     {
         if (_numSeedsLeft > 0)
         {
-            if(Input.GetKey(KeyCode.Space))
-            {
-                PrintMessage();
-                Instantiate(_plantPrefab);
-                _numSeedsPlanted++;
-                _numSeeds--;
-            }
+            Instantiate(_plantPrefab, _playerTransform.position, Quaternion.identity);
+            _numSeedsPlanted++;
+            _numSeeds--;
         }
     }
 

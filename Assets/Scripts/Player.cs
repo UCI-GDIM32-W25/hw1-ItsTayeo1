@@ -13,12 +13,13 @@ public class Player : MonoBehaviour
 
     private void Start ()
     {
-        _numSeedsLeft = _numSeeds;
-        _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted);
+        
     }
 
     private void Update()
     {
+        _numSeedsLeft = _numSeeds;
+        _plantCountUI.UpdateSeeds(_numSeedsLeft, _numSeedsPlanted);
         PlantSeed ();
         
 
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
 
     public void PlantSeed ()
     {
-        while (_numSeedsLeft > 0)
+        if (_numSeedsLeft > 0)
         {
             if(Input.GetKey(KeyCode.Space))
             {

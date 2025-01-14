@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        PlantSeed ();
+
         if(Input.GetKey(KeyCode.W))
         {
             _playerTransform.position += Vector3.up * _speed * Time.deltaTime;
@@ -34,10 +36,21 @@ public class Player : MonoBehaviour
         {
             _playerTransform.position += Vector3.left * _speed * Time.deltaTime;
         }
+
+    }
+
+    private void PrintMessage ()
+    {
+        Debug.Log("hello world");
     }
 
     public void PlantSeed ()
     {
-        
+        if(Input.GetKey(KeyCode.Space))
+        {
+            PrintMessage();
+        }
     }
+
+    
 }
